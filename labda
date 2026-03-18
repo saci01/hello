@@ -6,29 +6,28 @@
 using namespace std;
 
 int main() {
-    int szelesseg = 30;
-    int magassag = 15; // A pálya szélessége
-    int pozicio = 0;
-    int pozicio2 = 0; // Aktuális vízszintes helyzet
-    int irany1 = 1;   
-    int irany2 = 1;  // 1: jobbra, -1: balra
+    int szelesseg = 30; // A pálya szélessége
+    int magassag = 15; // A pálya magassága
+    int pozicio1 = 0; // Aktuális vízszintes helyzet
+    int pozicio2 = 0; // Aktuális függőleges helyzet
+    int irany1 = 1;   // 1: jobbra, -1: balra
+    int irany2 = 1;  // 1: fel, -1: le
 
     while (true) {
         // 1. Képernyő törlése
-        // Windows-on "cls", Linuxon/Mac-en "clear"
+        // Windows-on "cls"
 #ifdef _WIN32
         system("cls");
-#else
-        system("clear");
-#endif
 
-        // 2. A "0" karakter kirajzolása annyi szóközzel, amennyi a pozíciója
-
+         //2.1 A "0" karakter kirajzolása annyi sorvéggel, amennyi a pozíciója 
+         //2.2 A "0" karakter kirajzolása annyi szóközzel, amennyi a pozíciójaű
+       
         for (int j=0; j< pozicio2; j++)
-        {cout<<'\n'; }
-        for (int i = 0; i < pozicio; i++) {
-            cout << " ";
-        }
+        { cout<<'\n'; }
+
+        for (int i = 0; i < pozicio; i++) 
+        { cout << " "; }
+
         
         cout << "0" <<'\n';
 
@@ -38,12 +37,10 @@ int main() {
 
         // 4. Irányváltás, ha elértük a szélét
         if (pozicio >= szelesseg-1 || pozicio <= 0) {
-            irany1 *= -1;
-        }
+            irany1 *= -1;}
 
         if (pozicio2 >= magassag-1 || pozicio2 <= 0) {
-            irany2 *= -1;
-        }
+            irany2 *= -1;}
         
         // 5. Várakozás (pillanatnyi szünet), hogy látható legyen a mozgás
         // 100 ezredmásodperc (0.1 másodperc)
