@@ -1,0 +1,54 @@
+#include <iostream>
+#include <vector>
+#include <thread> // A várakozáshoz (sleep)
+#include <chrono> // Az időméréshez
+
+using namespace std;
+
+int main() {
+    int szelesseg = 30;
+    int magassag = 15; // A pálya szélessége
+    int pozicio = 0;
+    int pozicio2 = 0; // Aktuális vízszintes helyzet
+    int irany1 = 1;   
+    int irany2 = 1;  // 1: jobbra, -1: balra
+
+    while (true) {
+        // 1. Képernyő törlése
+        // Windows-on "cls", Linuxon/Mac-en "clear"
+#ifdef _WIN32
+        system("cls");
+#else
+        system("clear");
+#endif
+
+        // 2. A "0" karakter kirajzolása annyi szóközzel, amennyi a pozíciója
+
+        for (int j=0; j< pozicio2; j++)
+        {cout<<'\n'; }
+        for (int i = 0; i < pozicio; i++) {
+            cout << " ";
+        }
+        
+        cout << "0" <<'\n';
+
+        // 3. Pozíció frissítése a cikkcakkhoz
+        pozicio += irany1;
+        pozicio2 += irany2;
+
+        // 4. Irányváltás, ha elértük a szélét
+        if (pozicio >= szelesseg-1 || pozicio <= 0) {
+            irany1 *= -1;
+        }
+
+        if (pozicio2 >= magassag-1 || pozicio2 <= 0) {
+            irany2 *= -1;
+        }
+        
+        // 5. Várakozás (pillanatnyi szünet), hogy látható legyen a mozgás
+        // 100 ezredmásodperc (0.1 másodperc)
+        this_thread::sleep_for(chrono::milliseconds(100));
+    }
+
+    return 0;
+}
